@@ -62,6 +62,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation(libs.androidx.ui.tooling.preview.android)
+    implementation(libs.firebase.firestore.ktx)
 
     // MPAndroidChart for charts
     debugImplementation("com.github.PhilJay:MPAndroidChart:v3.1.0")  // Ou a versão mais recente

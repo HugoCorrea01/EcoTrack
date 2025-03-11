@@ -3,8 +3,7 @@ package com.example.ecotrack
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.*
-import androidx.navigation.compose.rememberNavController
+import com.example.ecotrack.ui.screens.EcoTrackApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,9 +11,5 @@ class MainActivity : ComponentActivity() {
         setContent {
             EcoTrackApp()
         }
-    }
-
-    private fun EcoTrackApp() {
-        TODO("Not yet implemented")
     }
 }
