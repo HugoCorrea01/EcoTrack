@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("com.google.gms.google-services") // Adiciona o Google Services Plugin
+
 }
 
 android {
@@ -55,14 +57,21 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("androidx.credentials:credentials:1.3.0")
+    implementation("com.google.firebase:firebase-analytics")
     implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+    implementation("com.google.firebase:firebase-firestore-ktx") // Firestore
+    implementation("com.google.firebase:firebase-auth-ktx") // Autenticação
 
     // Retrofit dependencies
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation(libs.androidx.ui.tooling.preview.android)
     implementation(libs.firebase.firestore.ktx)
+
+    // Vico Charts para gráficos interativos
+    implementation("com.patrykandpatrick.vico:compose:1.9.0")
+    implementation("com.patrykandpatrick.vico:core:1.9.0")
 
     // MPAndroidChart for charts
     debugImplementation("com.github.PhilJay:MPAndroidChart:v3.1.0")  // Ou a versão mais recente
