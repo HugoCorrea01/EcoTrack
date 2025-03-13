@@ -69,9 +69,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview.android)
     implementation(libs.firebase.firestore.ktx)
 
-    // Vico Charts para gráficos interativos
-    implementation("com.patrykandpatrick.vico:compose:1.9.0")
-    implementation("com.patrykandpatrick.vico:core:1.9.0")
 
     // MPAndroidChart for charts
     debugImplementation("com.github.PhilJay:MPAndroidChart:v3.1.0")  // Ou a versão mais recente
