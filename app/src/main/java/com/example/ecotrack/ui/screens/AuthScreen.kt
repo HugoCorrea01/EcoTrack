@@ -10,7 +10,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -51,53 +54,79 @@ fun LoginScreen(navController: NavHostController) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .background(MaterialTheme.colorScheme.background),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(
+                Brush.verticalGradient(
+                    colors = listOf(Color(0xFFB2DFDB), Color(0xFF00796B))
+                )
+            ),
+        contentAlignment = Alignment.Center
     ) {
-        Text("Login", style = MaterialTheme.typography.headlineMedium)
+        Card(
+            modifier = Modifier.padding(16.dp),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White)
+        ) {
+            Column(
+                modifier = Modifier.padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    "EcoTrack",
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF00796B)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
+                OutlinedTextField(
+                    value = username,
+                    onValueChange = { username = it },
+                    label = { Text("Usuário") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp)
+                )
 
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("Usuário") },
-            modifier = Modifier.fillMaxWidth()
-        )
+                Spacer(modifier = Modifier.height(8.dp))
 
-        Spacer(modifier = Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text("Senha") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp)
+                )
 
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Senha") },
-            modifier = Modifier.fillMaxWidth()
-        )
+                Spacer(modifier = Modifier.height(16.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = {
+                        if (dbHelper.loginUser(username, password)) {
+                            Toast.makeText(context, "Login bem-sucedido!", Toast.LENGTH_SHORT).show()
+                            navController.navigate("home")
+                        } else {
+                            Toast.makeText(context, "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show()
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text("Entrar", fontSize = 18.sp)
+                }
 
-        Button(onClick = {
-            if (dbHelper.loginUser(username, password)) {
-                Toast.makeText(context, "Login bem-sucedido!", Toast.LENGTH_SHORT).show()
-                navController.navigate("dashboard")
-            } else {
-                Toast.makeText(context, "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show()
+                Spacer(modifier = Modifier.height(8.dp))
+
+                TextButton(onClick = { navController.navigate("register") }) {
+                    Text("Criar Conta", fontSize = 16.sp, color = Color(0xFF00796B))
+                }
             }
-        }, modifier = Modifier.fillMaxWidth()) {
-            Text("Entrar", fontSize = 18.sp)
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Button(onClick = { navController.navigate("register") }, modifier = Modifier.fillMaxWidth()) {
-            Text("Criar Conta", fontSize = 18.sp)
         }
     }
 }
+
+
 
 @Composable
 fun RegisterScreen(navController: NavHostController) {
@@ -106,44 +135,69 @@ fun RegisterScreen(navController: NavHostController) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .background(MaterialTheme.colorScheme.background),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(
+                Brush.verticalGradient(
+                    colors = listOf(Color(0xFFB2DFDB), Color(0xFF00796B))
+                )
+            ),
+        contentAlignment = Alignment.Center
     ) {
-        Text("Criar Conta", style = MaterialTheme.typography.headlineMedium)
+        Card(
+            modifier = Modifier.padding(16.dp),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White)
+        ) {
+            Column(
+                modifier = Modifier.padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    "Criar Conta",
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF00796B)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
+                OutlinedTextField(
+                    value = username,
+                    onValueChange = { username = it },
+                    label = { Text("Usuário") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp)
+                )
 
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("Usuário") },
-            modifier = Modifier.fillMaxWidth()
-        )
+                Spacer(modifier = Modifier.height(8.dp))
 
-        Spacer(modifier = Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text("Senha") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp)
+                )
 
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Senha") },
-            modifier = Modifier.fillMaxWidth()
-        )
+                Spacer(modifier = Modifier.height(16.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = {
-            if (dbHelper.registerUser(username, password)) {
-                Toast.makeText(context, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
-                navController.navigate("login")
-            } else {
-                Toast.makeText(context, "Usuário já existe!", Toast.LENGTH_SHORT).show()
+                Button(
+                    onClick = {
+                        if (dbHelper.registerUser(username, password)) {
+                            Toast.makeText(context, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
+                            navController.navigate("login")
+                        } else {
+                            Toast.makeText(context, "Usuário já existe!", Toast.LENGTH_SHORT).show()
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text("Registrar", fontSize = 18.sp)
+                }
             }
-        }, modifier = Modifier.fillMaxWidth()) {
-            Text("Registrar", fontSize = 18.sp)
         }
     }
 }
+
